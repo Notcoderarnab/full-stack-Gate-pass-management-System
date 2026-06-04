@@ -54,7 +54,9 @@ const normalizeApiBaseUrl = (value: string) => {
 };
 
 const api = axios.create({
-  baseURL: normalizeApiBaseUrl(import.meta.env.VITE_API_URL || "http://localhost:5000/api"),
+  baseURL: normalizeApiBaseUrl(
+    import.meta.env.VITE_API_URL || "https://full-stack-gate-pass-management-system.onrender.com"
+  ),
   withCredentials: true,
 });
 
