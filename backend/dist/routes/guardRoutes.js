@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const gaurdController_1 = require("../controllers/gaurdController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const router = (0, express_1.Router)();
+router.use(authMiddleware_1.authenticate, (0, authMiddleware_1.requireRole)('GUARD', 'ADMIN'));
+router.post('/scan', gaurdController_1.scanQRCode);
+router.get('/logs', gaurdController_1.getScanLogs);
+exports.default = router;

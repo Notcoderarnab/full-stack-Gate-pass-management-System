@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const hostController_1 = require("../controllers/hostController");
+const authMiddleware_1 = require("../middlewares/authMiddleware");
+const router = (0, express_1.Router)();
+router.use(authMiddleware_1.authenticate, (0, authMiddleware_1.requireRole)('HOST'));
+router.get('/dashboard', hostController_1.getHostDashboard);
+router.get('/requests', hostController_1.getHostRequests);
+router.patch('/requests/:id/approve', hostController_1.approveVisit);
+router.patch('/requests/:id/reject', hostController_1.rejectVisit);
+exports.default = router;
