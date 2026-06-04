@@ -88,7 +88,7 @@ app.use(errorMiddleware);
 // ── CRON: Expire old QR codes (runs daily at midnight) ─────
 cron.schedule('0 0 * * *', async () => {
   const result = await Visit.updateMany(
-    { status: 'APPROVED', qrExpiresAt: { $lt: new Date() } },
+    { status: { $in: ['APPROVED', 'CHECKED_IN'] }, qrExpiresAt: { $lt: new Date() } },
     { status: 'EXPIRED' }
   );
   console.log(`🕛 Cron: Expired ${result.modifiedCount} old QR codes`);

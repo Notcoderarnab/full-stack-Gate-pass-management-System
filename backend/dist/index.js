@@ -80,7 +80,7 @@ app.get('/api/health', (req, res) => {
 app.use(errorMiddleware_1.errorMiddleware);
 // ── CRON: Expire old QR codes (runs daily at midnight) ─────
 node_cron_1.default.schedule('0 0 * * *', async () => {
-    const result = await Visit_1.Visit.updateMany({ status: 'APPROVED', qrExpiresAt: { $lt: new Date() } }, { status: 'EXPIRED' });
+    const result = await Visit_1.Visit.updateMany({ status: { $in: ['APPROVED', 'CHECKED_IN'] }, qrExpiresAt: { $lt: new Date() } }, { status: 'EXPIRED' });
     console.log(`🕛 Cron: Expired ${result.modifiedCount} old QR codes`);
 });
 // ── START SERVER ───────────────────────────────────────────
