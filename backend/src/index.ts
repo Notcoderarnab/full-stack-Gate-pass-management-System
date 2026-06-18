@@ -64,6 +64,15 @@ app.use('/api/guard',  guardRoutes);
 app.use('/api/admin', adminRoutes);
 
 // ── HEALTH CHECK ───────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'GatePass backend is running',
+    api: '/api',
+    health: '/api/health',
+  });
+});
+
 app.get('/api', (req, res) => {
   res.json({
     success: true,

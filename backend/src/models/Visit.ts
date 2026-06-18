@@ -53,7 +53,4 @@ export type VisitStatus = | 'PENDING'      // Guest submitted, waiting for host
   { timestamps: true }
 );
 
-// Index for fast QR token lookup
-visitSchema.index({ qrToken: 1 });
-
 export const Visit = mongoose.model<IVisit>('Visit', visitSchema);

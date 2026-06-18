@@ -55,6 +55,4 @@ const visitSchema = new mongoose_1.Schema({
     qrExpiresAt: { type: Date },
     checkedInAt: { type: Date },
 }, { timestamps: true });
-// Index for fast QR token lookup
-visitSchema.index({ qrToken: 1 });
 exports.Visit = mongoose_1.default.model('Visit', visitSchema);
